@@ -1,0 +1,83 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Zabata8009!
+      - MYSQL_DATABASE=cypht
+      - MYSQL_USER=cypht
+      - MYSQL_PASSWORD=Zabata8009!
+  cypht:
+    image: josh900/cypht-docker2:latest
+    volumes:
+      - ./cypht/users:/var/lib/hm3/users
+    ports:
+      - "8084:80"
+    environment:
+      - CYPHT_AUTH_USERNAME=admin
+      - CYPHT_AUTH_PASSWORD=Zabata8009!
+      - CYPHT_DB_CONNECTION_TYPE=host
+      - CYPHT_DB_HOST=db
+      - CYPHT_DB_NAME=cypht
+      - CYPHT_DB_USER=cypht
+      - CYPHT_DB_PASS=Zabata8009!
+      - CYPHT_SESSION_TYPE=DB
+
+      - CYPHT_DISABLE_ORIGIN_CHECK=true
+      - CYPHT_ENABLE_MEMCACHED=true
+      - CYPHT_MEMCACHED_SERVER=127.0.0.1
+      - CYPHT_MEMCACHED_PORT=11211
+      - CYPHT_MEMCACHED_AUTH=false
+      - CYPHT_MEMCACHED_USER=root
+      - CYPHT_MEMCACHED_PASS=Zabata8009!
+      - CYPHT_ALLOW_LONG_SESSION=true
+      - CYPHT_LONG_SESSION_LIFETIME=90
+      - CYPHT_DISABLE_IP_CHECK=true
+      - CYPHT_ALLOW_EXTERNAL_IMAGE_SOURCES=false
+      - CYPHT_DISABLE_FINGERPRINT=true
+      - CYPHT_MODULE_GMAIL_CONTACTS=true
+      - CYPHT_DEFAULT_SETTING_IMAP_PER_PAGE=30
+      - CYPHT_DEFAULT_SETTING_SENT_PER_SOURCE=500
+      - CYPHT_DEFAULT_SETTING_SENT_SINCE='-5 years'
+      - CYPHT_DEFAULT_SETTING_ALL_EMAIL_PER_SOURCE=500
+      - CYPHT_DEFAULT_SETTING_ALL_EMAIL_SINCE='-5 years'
+      - CYPHT_DEFAULT_SETTING_ALL_SINCE='-5 years'
+      - CYPHT_DEFAULT_SETTING_ALL_PER_SOURCE=500
+      - CYPHT_DEFAULT_SETTING_FLAGGED_SINCE='-5 years'
+      - CYPHT_DEFAULT_SETTING_FLAGGED_SINCE='-5 years'
+      - CYPHT_DEFAULT_SETTING_TIMEZONE=ETC
+      - CYPHT_DEFAULT_SETTING_FEED_LIMIT=500
+      - CYPHT_DEFAULT_SETTING_FEED_SINCE='-5 years'
+      - CYPHT_DEFAULT_SETTING_SMTP_COMPOSE_TYPE=0
+      - CYPHT_ENABLE_REDIS=true
+      - CYPHT_REDIS_SERVER=127.0.0.1
+      - CYPHT_REDIS_PORT=6379
+      - CYPHT_REDIS_PASS=Zabata8009!
+  memcached:
+    image: bitnami/memcached:latest
+    ports:
+      - '11211:11211'
+    environment:
+       - MEMCACHED_CACHE_SIZE=128
+       - MEMCACHED_MAX_CONNECTIONS=2000
+       - MEMCACHED_THREADS=4
+       - MEMCACHED_USERNAME=root
+       - MEMCACHED_PASSWORD=Zabata8009!
+  redis:
+    image: bitnami/redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PASSWORD=Zabata8009!
+      - REDIS_PORT_NUMBER=6379
+    ports:
+      - '6379:6379' 
+
+
+
+
+
+
+
+
